@@ -1,0 +1,17 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/aaa?serverTimezone=UTC
+    username: root
+    password: root
+server:
+  port: 8088
+
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  identity: MYSQL
+
+mybatis:
+  #实体类所在包名
+  type-aliases-package: com.amarsoft.pojo
