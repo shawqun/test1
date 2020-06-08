@@ -22,6 +22,7 @@ public class Test {
 
     @RequestMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+        //============================================================================
         //项目路径
         String property = System.getProperty("user.dir");//D:\project\bootsecond
         //项目相对路径
@@ -33,13 +34,14 @@ public class Test {
         String path2 = ResourceUtils.getURL("classpath:").getPath();
 
         String servletContextName = request.getServletContext().getServletContextName();//application
+        //============================================================================
 
         String originalFilename = file.getOriginalFilename();
         String path = "demo/src/main/resources/static/files/";
         File fileDir = new File(path);
         //递归生成文件夹
         if (!fileDir.exists()){
-            fileDir.mkdir();
+            fileDir.mkdirs();
         }
 
         File newFile = new File(fileDir.getAbsolutePath() + File.separator + originalFilename);
