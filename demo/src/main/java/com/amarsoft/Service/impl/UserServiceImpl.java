@@ -11,7 +11,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BCryptPasswordEncoder encoder;
     @Autowired(required = false)
     private UserDao userDao;
 
@@ -25,5 +26,11 @@ public class UserServiceImpl implements UserService {
         String password = user.getPassword();
         user.setPassword(encoder.encode(password));
         userDao.insertSelective(user);
+    }
+
+    @Override
+    public User findByName(String username) {
+        User user = new User(username);
+        return userDao.selectOne(user);
     }
 }

@@ -1,5 +1,9 @@
 package com.amarsoft.controller;
 
+import com.amarsoft.Service.UserService;
+import com.amarsoft.pojo.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/b")
 public class LoginController {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     @RequestMapping("/login")
     public String login(@RequestBody Map<String, String> paraMap, HttpServletRequest request, HttpServletResponse response) {
         boolean res = false;
@@ -24,9 +33,11 @@ public class LoginController {
     }
 
     private boolean check(String username, String password) {
-        if (!StringUtils.isEmpty(username) && !StringUtils.isEmpty(password)) {
-            if ("xiao".equals(username) && "qun".equals(password)) {
-                return true;
+        if (!StringUtils.isEmpty(username)) {
+            User user = userService.findByName(username);
+            if (user != null) {
+                String bcyptPassword = user.getPassword();
+                return encoder.matches(password, bcyptPassword);
             }
         }
         return false;
