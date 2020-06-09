@@ -1,5 +1,6 @@
-package com.amarsoft.Service;
+package com.amarsoft.Service.impl;
 
+import com.amarsoft.Service.UserService;
 import com.amarsoft.dao.UserDao;
 import com.amarsoft.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
