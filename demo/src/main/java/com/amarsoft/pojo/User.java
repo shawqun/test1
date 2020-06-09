@@ -9,15 +9,10 @@ public class User implements Serializable {
     @Id
     private Integer id;
     private String name;
+    private String password;
     private String company;
 
     public User() {
-    }
-
-    public User(Integer id, String name, String company) {
-        this.id = id;
-        this.name = name;
-        this.company = company;
     }
 
     public Integer getId() {
@@ -36,6 +31,14 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getCompany() {
         return company;
     }
@@ -44,12 +47,10 @@ public class User implements Serializable {
         this.company = company;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", company='" + company + '\'' +
-                '}';
+    public User(Integer id, String name, String password, String company) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.company = company;
     }
 }

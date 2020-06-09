@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/a")
-public class Test {
+public class UserController {
     @Autowired
     private UserService userService;
 
@@ -47,20 +47,24 @@ public class Test {
         File newFile = new File(fileDir.getAbsolutePath() + File.separator + originalFilename);
 
         file.transferTo(newFile);
-        //111111111
-        //2222222222222
-        //888888888888888
         return "success";
     }
 
-    @RequestMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
     @GetMapping("/user")
     public List<User> getAll(){
         List<User> users = userService.getAll();
         return users;
     }
+    @PostMapping("/user")
+    public String save(@RequestBody User user){
+        try {
+            userService.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "添加失败";
+        }
+        return "添加成功";
+    }
+
 
 }

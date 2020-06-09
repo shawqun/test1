@@ -13,5 +13,6 @@ mapper:
   identity: MYSQL
 
 mybatis:
-  #实体类所在包名
   type-aliases-package: com.amarsoft.pojo
+
+
